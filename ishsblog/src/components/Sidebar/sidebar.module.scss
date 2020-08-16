@@ -1,0 +1,13 @@
+.sidebar {
+    width: 30vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba( 28, 28, 37,1), rgba( 28, 28, 37,1) );
+    padding: 10rem 6rem 5rem 6rem;
+
+    @media screen and (max-width: 37.5em){
+        width: 100vw;
+        height: 100vh;
+    }
+}
