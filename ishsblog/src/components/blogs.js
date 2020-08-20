@@ -4,20 +4,43 @@ import List from "./Lists/list"
 
 export default function Blogs(props) {
   const header = "Posts"
-  const contents = "Coming soon... "
+  // const contents = "Coming soon... "
+
+  // const data = useStaticQuery(
+  //   graphql`
+  //     query {
+  //       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+  //         edges {
+  //           node {
+  //             id
+  //             excerpt
+  //             frontmatter {
+  //               title
+  //               date
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   `
+  // )
 
   const data = useStaticQuery(
     graphql`
       query {
         allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+          totalCount
           edges {
             node {
               id
-              excerpt
               frontmatter {
                 title
-                date
+                date(formatString: "DD MMMM, YYYY")
               }
+              fields {
+                slug
+              }
+              excerpt
             }
           }
         }
@@ -26,5 +49,14 @@ export default function Blogs(props) {
   )
 
   console.log(data)
-  return <List header={header} contents={contents} />
+  const out = data.allMarkdownRemark.edges.map(
+    ({ node }) => {
+      return {
+        title: node.frontmatter.title,
+        date: node.frontmatter.date,
+        link: node.fields.slug
+      }
+    }
+  )
+  return <List header={header} blogs={out} />
 }
