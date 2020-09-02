@@ -1,62 +1,38 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import List from "./Lists/list"
+import React from "react";
+import List from "./Lists/list";
+import { GithubOutline } from "@styled-icons/evaicons-outline/GithubOutline";
+import { LinkedinOutline } from "@styled-icons/evaicons-outline/LinkedinOutline";
 
-export default function Blogs(props) {
-  const header = "Posts"
-  // const contents = "Coming soon... "
+export default function Blogs() {
+  const header = "Links";
 
-  // const data = useStaticQuery(
-  //   graphql`
-  //     query {
-  //       allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-  //         edges {
-  //           node {
-  //             id
-  //             excerpt
-  //             frontmatter {
-  //               title
-  //               date
-  //             }
-  //           }
-  //         }
-  //       }
-  //     }
-  //   `
-  // )
-
-  const data = useStaticQuery(
-    graphql`
-      query {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-          totalCount
-          edges {
-            node {
-              id
-              frontmatter {
-                title
-                date(formatString: "DD MMMM, YYYY")
-              }
-              fields {
-                slug
-              }
-              excerpt
-            }
-          }
-        }
-      }
-    `
-  )
-
-  console.log(data)
-  const out = data.allMarkdownRemark.edges.map(
-    ({ node }) => {
-      return {
-        title: node.frontmatter.title,
-        date: node.frontmatter.date,
-        link: node.fields.slug
-      }
+  const out = [
+    {
+      name: 'Code', 
+      url: 'https://github.com/Iopong',
+      component: GithubOutline
+    },
+    {
+      name: 'Experience',
+      url: 'https://www.linkedin.com/in/ishmael-opong-277ab7154/',
+      component: LinkedinOutline
     }
+  ];
+  return (
+    <List header={header}>
+      <ul>
+        {
+          out.map((link, indx) => {
+            return(
+              <li key={indx}>
+                <link.component size={24}/>
+                <i class="fas fa-flag"></i>	
+                <a href={link.url}>{link.name}</a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </List>
   )
-  return <List header={header} blogs={out} />
 }

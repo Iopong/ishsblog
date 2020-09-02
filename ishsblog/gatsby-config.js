@@ -7,9 +7,21 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Testing test title`,
+    title: `Ish | Software Engineer`,
+    description: `Ish's developer experience...`,
+    author: `Ish`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Ish`,
+        short_name: `Ish`,
+        start_url: `/`,
+        display: `standalone`,
+        icon: `src/images/icon.png`
+      }
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -18,6 +30,9 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    `gatsby-plugin-fontawesome-css`,
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,
+    `gatsby-plugin-offline`
   ],
 }

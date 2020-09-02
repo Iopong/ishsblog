@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+    height: 100%;
+    font-size: 5rem;
+
+    p {
+        text-indent: 3.2rem;
+    }
+
+    @media screen and (max-width: 37.5em){
+        font-size: 3.5rem;                                                                                                                                                                                                                                                        
+    }
+}
